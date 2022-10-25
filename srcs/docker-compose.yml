@@ -1,0 +1,34 @@
+version: "3.5"
+
+services:
+  back-end:
+    container_name: back-end
+    build: ./requirements/back-end
+    image: back-end
+    networks:
+      - dnet
+    ports:
+      - "3000:3000"
+
+  postgres:
+    container_name: postgres
+    image: postgres:13
+    ports:
+      - 5432:5432
+    env_file:
+      - .env
+    volumes:
+      - pgData:/var/lib/postgresql/data
+
+networks:
+  dnet:
+    driver: bridge
+
+volumes:
+  pgData:
+    driver: local
+    name: pgData 
+    driver_opts:
+      type: none
+      o: bind
+      device: /mnt/nfs/homes/abrun/data/pgData
