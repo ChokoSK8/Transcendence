@@ -9,14 +9,19 @@ services:
       - dnet
     ports:
       - "3000:3000"
+      - "5555:5555"
+    env_file:
+      - .env
     volumes:
       - jsData:/home/Projects/NestFirst
 
   postgres:
     container_name: postgres
     image: postgres:13
+    networks:
+      - dnet
     ports:
-      - 5432:5432
+      - "5432:5432"
     env_file:
       - .env
     volumes:
@@ -29,15 +34,10 @@ networks:
 volumes:
   pgData:
     driver: local
-    name: pgData 
-    driver_opts:
-      type: none
-      o: bind
-      device: /home/user42/data/pgData
   jsData:
     driver: local
     name: jsData 
     driver_opts:
       type: none
       o: bind
-      device: /home/user42/Projects/NestFirst
+      device: /mnt/nfs/homes/abrun/Projects/NestFirst
