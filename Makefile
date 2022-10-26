@@ -4,7 +4,7 @@ all:	clean
 	docker-compose -f $(YML) build
 	docker-compose -f $(YML) up
 
-relauch:
+relaunch:
 	docker-compose -f $(YML) up
 
 down:

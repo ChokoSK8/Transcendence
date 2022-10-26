@@ -1,8 +1,6 @@
 FROM debian:11
 
-COPY ./.ssh/id_rsa /root/.ssh/id_rsa
-
-RUN apt update && apt install -y npm nodejs vim procps git ssh
+RUN apt update && apt install -y npm nodejs vim procps curl
 
 COPY ./script.sh /home
 

@@ -9,6 +9,8 @@ services:
       - dnet
     ports:
       - "3000:3000"
+    volumes:
+      - jsData:/home/Projects/NestFirst
 
   postgres:
     container_name: postgres
@@ -31,4 +33,11 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /mnt/nfs/homes/abrun/data/pgData
+      device: /home/user42/data/pgData
+  jsData:
+    driver: local
+    name: jsData 
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/user42/Projects/NestFirst
