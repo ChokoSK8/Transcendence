@@ -1,6 +1,6 @@
 set autoindent
 set nu
-set colorscheme morning
+colorscheme morning
 set tabstop=2
 filetype on
 set background=light
