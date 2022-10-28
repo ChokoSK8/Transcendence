@@ -1,0 +1,13 @@
+{
+	"compilerOptions" : {
+		"target": "es5",
+		"pretty": true,
+		"outDir": "./build"
+	},
+	"files": [
+		"demo.ts",
+		"class.ts",
+		"interface.ts"
+	],
+	"excluse": ["node_modules"]
+}
