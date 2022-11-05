@@ -10,5 +10,3 @@ cd /home/Projects/NestFirst
 npm i -g @nestjs/cli
 npm install
 npx prisma migrate deploy
-
-tail -f /dev/null
