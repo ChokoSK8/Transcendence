@@ -1,5 +1,7 @@
-class Demo {
-    constructor() {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+class DemoClass {
+    constructor(options) {
     }
     demo() {
     }
@@ -8,8 +10,11 @@ class Demo {
     set element(value) {
         this._element = value;
     }
+    get element() {
+        return (this._element);
+    }
 }
-let d = new Demo();
+let d = new DemoClass({ autoplay: true, x: 4 });
 d.demo();
-Demo.static_demo();
+DemoClass.static_demo();
 //# sourceMappingURL=class.js.map

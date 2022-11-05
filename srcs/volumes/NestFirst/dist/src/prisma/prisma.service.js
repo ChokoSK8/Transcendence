@@ -14,6 +14,11 @@ const common_1 = require("@nestjs/common");
 const client_1 = require("@prisma/client");
 const config_1 = require("@nestjs/config");
 let PrismaService = class PrismaService extends client_1.PrismaClient {
+    async enableShutdownHooks(app) {
+        this.$on('beforeExit', async () => {
+            await app.close();
+        });
+    }
     constructor(configService) {
         super({
             datasources: {

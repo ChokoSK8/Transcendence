@@ -40,4 +40,4 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /mnt/nfs/homes/abrun/Projects/Transcendence/srcs/volumes/NestFirst
+      device: /mnt/nfs/homes/abrun/Projects/My_transcendence/srcs/volumes/NestFirst
