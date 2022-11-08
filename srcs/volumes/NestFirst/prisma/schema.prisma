@@ -20,19 +20,20 @@ model User {
 	hashPwd String
 	isAdmin Boolean @default(false)
 
-	bookmarks Bookmark[]
+	blockedUsers Int[]?
 
 	@@map("users")
 }
 
-model Bookmark {
+model Channel {
 	id Int @id @default(autoincrement())
 	createAt DateTime @default(now())
 	updatedAt DateTime @updatedAt
 
-	title String
-	description String?
-	link String
+	name String
+	state Int @default(0)
+	hashPwd String?
+	admins Int[]?
 
 	// when user create bookmarks, userId is set with user's id
 	user User @relation(fields: [userId], references: [id])

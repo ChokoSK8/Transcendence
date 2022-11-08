@@ -8,25 +8,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.nestFirstModule = void 0;
 const common_1 = require("@nestjs/common");
+const logger_middleware_1 = require("./middleware/logger.middleware");
 const nestFirst_controller_1 = require("./nestFirst.controller");
 const auth_module_1 = require("./auth/auth.module");
 const bookmark_module_1 = require("./bookmark/bookmark.module");
 const prisma_module_1 = require("./prisma/prisma.module");
 const config_1 = require("@nestjs/config");
-const user_module_1 = require("./user/user.module");
+const users_module_1 = require("./users/users.module");
+const chat_module_1 = require("./chat/chat.module");
 let nestFirstModule = class nestFirstModule {
+    configure(consumer) {
+        consumer
+            .apply(logger_middleware_1.LoggerMiddleware)
+            .exclude({ path: 'users', method: common_1.RequestMethod.POST })
+            .forRoutes({ path: 'users', method: common_1.RequestMethod.ALL });
+    }
 };
 nestFirstModule = __decorate([
     (0, common_1.Module)({
         controllers: [nestFirst_controller_1.nestFirstCtrl],
-        imports: [user_module_1.UserModule,
+        imports: [
             auth_module_1.AuthModule,
             bookmark_module_1.BookmarkModule,
             prisma_module_1.PrismaModule,
-            config_1.ConfigModule.forRoot({ isGlobal: true, })
+            config_1.ConfigModule.forRoot({ isGlobal: true, }),
+            users_module_1.UsersModule,
+            chat_module_1.ChatModule
         ],
     })
 ], nestFirstModule);
 exports.nestFirstModule = nestFirstModule;
-;
 //# sourceMappingURL=nestFirst.module.js.map

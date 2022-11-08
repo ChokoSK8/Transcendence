@@ -11,5 +11,3 @@ EXPOSE 3000
 WORKDIR /home
 
 ENTRYPOINT [ "./script.sh" ]
-
-CMD	["cd Projects/NestFirst ; npm run start:dev"]
