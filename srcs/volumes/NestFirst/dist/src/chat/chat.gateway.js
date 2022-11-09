@@ -18,7 +18,7 @@ let ChatGateway = class ChatGateway {
     }
     onModuleInit() {
         this.server.on('connection', (socket) => {
-            socket.emit('chat', 'Hey i\'m new');
+            socket.emit('message', 'Hey i\'m new');
             console.log({ "socket.id": socket.id });
             console.log('connected');
         });
@@ -33,7 +33,7 @@ let ChatGateway = class ChatGateway {
     }
     handleChat(client, msg) {
         console.log({ "client": client.id });
-        client.broadcast.emit('chat', msg);
+        client.broadcast.emit('message', msg);
     }
 };
 __decorate([
@@ -41,7 +41,7 @@ __decorate([
     __metadata("design:type", socket_io_1.Server)
 ], ChatGateway.prototype, "server", void 0);
 __decorate([
-    (0, websockets_1.SubscribeMessage)('chat'),
+    (0, websockets_1.SubscribeMessage)('message'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", void 0)

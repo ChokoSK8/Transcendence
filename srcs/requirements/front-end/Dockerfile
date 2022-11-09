@@ -20,7 +20,7 @@ EXPOSE	3000
 
 RUN	mkdir /home/Projects
 
-RUN	cd /home/Projects ; npm i create-react-app ; npx create-react-app react-websocket --template typescript
+#RUN	cd /home/Projects ; npm i create-react-app ; npx create-react-app react-websocket --template typescript
 
 WORKDIR	/home/Projects/react-websocket
 
