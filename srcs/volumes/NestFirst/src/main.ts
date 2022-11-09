@@ -19,6 +19,6 @@ async function bootstrap() {
 	// In order to use ValidationPipe everywhere
 	// whitelist used to strip out unvalided parameters
   app.useGlobalPipes(new ValidationPipe({whitelist: true}));
-  await app.listen(3000);
+  await app.listen(3001);
 }
 bootstrap();

@@ -8,7 +8,7 @@ services:
     networks:
       - dnet
     ports:
-      - "3000:3000"
+      - "3001:3001"
       - "5555:5555"
     env_file:
       - .env
@@ -27,6 +27,19 @@ services:
     volumes:
       - pgData:/var/lib/postgresql/data
 
+  front-end:
+    container_name: front-end
+    build: ./requirements/front-end
+    image: front-end
+    networks:
+      - dnet
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    volumes:
+      - rtData:/home/Projects/react-websocket
+
 networks:
   dnet:
     driver: bridge
@@ -41,3 +54,10 @@ volumes:
       type: none
       o: bind
       device: /mnt/nfs/homes/abrun/Projects/My_transcendence/srcs/volumes/NestFirst
+  rtData:
+    driver: local
+    name: rtData 
+    driver_opts:
+      type: none
+      o: bind
+      device: /mnt/nfs/homes/abrun/Projects/My_transcendence/srcs/volumes/react-websocket

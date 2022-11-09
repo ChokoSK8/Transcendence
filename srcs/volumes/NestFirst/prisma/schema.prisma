@@ -20,7 +20,7 @@ model User {
 	hashPwd String
 	isAdmin Boolean @default(false)
 
-	blockedUsers Int[]?
+	blockedUsers Int[]
 
 	@@map("users")
 }
@@ -33,11 +33,7 @@ model Channel {
 	name String
 	state Int @default(0)
 	hashPwd String?
-	admins Int[]?
-
-	// when user create bookmarks, userId is set with user's id
-	user User @relation(fields: [userId], references: [id])
-	userId Int
+	admins Int[]
 
 	@@map("bookmarks")
 }
