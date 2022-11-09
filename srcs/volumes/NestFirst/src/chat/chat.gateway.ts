@@ -16,7 +16,7 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect, On
 	onModuleInit() {
 		this.server.on('connection', (socket) => {
 			socket.emit('chat', 'Hey i\'m new');
-			console.log(socket.id);
+			console.log({"socket.id": socket.id});
 			console.log('connected');
 		});
 	}
@@ -39,8 +39,9 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect, On
 	@SubscribeMessage('chat')
 
 		// client is a reference to the socket instance which send the msg
-	handleChat(@MessageBody() body): string {
-		console.log({body});
-		return (body);
+	handleChat(client, msg): void {
+		console.log({"client": client.id});
+			// client send msg to all other client listenning to the event 'chat'
+		client.broadcast.emit('chat', msg);
 	}
 }

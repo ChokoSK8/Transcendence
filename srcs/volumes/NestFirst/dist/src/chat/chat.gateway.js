@@ -8,9 +8,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ChatGateway = void 0;
 const websockets_1 = require("@nestjs/websockets");
@@ -22,7 +19,7 @@ let ChatGateway = class ChatGateway {
     onModuleInit() {
         this.server.on('connection', (socket) => {
             socket.emit('chat', 'Hey i\'m new');
-            console.log(socket.id);
+            console.log({ "socket.id": socket.id });
             console.log('connected');
         });
     }
@@ -34,9 +31,9 @@ let ChatGateway = class ChatGateway {
         this.users--;
         this.server.emit('users', this.users);
     }
-    handleChat(body) {
-        console.log({ body });
-        return (body);
+    handleChat(client, msg) {
+        console.log({ "client": client.id });
+        client.broadcast.emit('chat', msg);
     }
 };
 __decorate([
@@ -45,10 +42,9 @@ __decorate([
 ], ChatGateway.prototype, "server", void 0);
 __decorate([
     (0, websockets_1.SubscribeMessage)('chat'),
-    __param(0, (0, websockets_1.MessageBody)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", String)
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", void 0)
 ], ChatGateway.prototype, "handleChat", null);
 ChatGateway = __decorate([
     (0, websockets_1.WebSocketGateway)()
