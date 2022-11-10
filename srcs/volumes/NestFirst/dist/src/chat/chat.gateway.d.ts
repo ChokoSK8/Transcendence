@@ -7,5 +7,5 @@ export declare class ChatGateway implements OnGatewayConnection, OnGatewayDiscon
     onModuleInit(): void;
     handleConnection(): Promise<void>;
     handleDisconnect(): Promise<void>;
-    handleChat(client: any, msg: any): void;
+    handleChat(msg: string): void;
 }

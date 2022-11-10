@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
-import { Socket, io } from 'socket.io-client';
+import io, { Socket } from 'socket.io-client';
 import './App.css';
 import MessageInput from './components/message-input.component';
 import Messages from './components/messages.component';
@@ -11,6 +11,11 @@ function App() {
 	const [socket, setSocket] = useState<Socket>()
 		// [] added to say at messages variable initialize is a empty array
 	const [messages, setMessages] = useState<string[]>([])
+	const [count, setCount] = useState(0);
+
+	useEffect(() => {
+		document.title = `${count}`;
+	})
 
 	const	send = (value: string) => {
 		console.log({value});
@@ -20,9 +25,7 @@ function App() {
 		// [setSocket] dependency will make useEffect runs only on the first render and any time dependency value changes
 	useEffect(() => {
 			// passing the chat.gateway.url
-		const newSocket = io('back-end:3001');
-		console.log({newSocket});
-		console.log({"msg": "hello"});
+		const newSocket = io('http://localhost:4141');
 		setSocket(newSocket);
 	}, [])
 
@@ -39,13 +42,22 @@ function App() {
 		return () => {
 			socket?.off("message", messageListener);
 		}
-	}, [messageListener])
+	})
 
 	return (
 		<>
+			<div>
+				<p>You clicked {count} times </p>
+				<button onClick={() => setCount(count + 1)}>
+					Click me
+				</button>
+			</div>
 			{" "}
 			<MessageInput send={send} />
 			<Messages messages={messages} />
+			<div>
+				<p>Message: {messages} </p>
+			</div>
 		</>
 	)
 }

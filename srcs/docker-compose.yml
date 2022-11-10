@@ -10,10 +10,13 @@ services:
     ports:
       - "3001:3001"
       - "5555:5555"
+      - "4343:80"
     env_file:
       - .env
     volumes:
       - jsData:/home/Projects/NestFirst
+    depends_on:
+      - postgres
 
   postgres:
     container_name: postgres
@@ -31,14 +34,20 @@ services:
     container_name: front-end
     build: ./requirements/front-end
     image: front-end
+    links:
+      - back-end
     networks:
       - dnet
     ports:
       - "3000:3000"
+      - "4000:4000"
+      - "4141:80"
     env_file:
       - .env
     volumes:
       - rtData:/home/Projects/react-websocket
+    depends_on:
+      - back-end
 
 networks:
   dnet:

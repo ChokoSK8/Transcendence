@@ -9,5 +9,5 @@ mkdir -p /home/Projects/NestFirst
 cd /home/Projects/NestFirst
 npm i -g @nestjs/cli
 npm install
-npx prisma migrate deploy
+npx prisma migrate dev
 npm run start:dev

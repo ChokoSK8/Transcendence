@@ -3,7 +3,7 @@ import { Server } from 'socket.io';
 import { OnModuleInit } from '@nestjs/common';
 
 	// WebSocketGateway allows us to use the socket.io functionnality
-@WebSocketGateway()
+@WebSocketGateway(4343, {cors: '*'})
 
 	// OnGateways are here to handle connection and disconnection
 export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect, OnModuleInit {
@@ -39,9 +39,10 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect, On
 	@SubscribeMessage('message')
 
 		// client is a reference to the socket instance which send the msg
-	handleChat(client, msg): void {
-		console.log({"client": client.id});
+//	handleChat(client, msg): void {
+		handleChat(@MessageBody() msg: string): void {
+		//console.log({"client": client.id});
 			// client send msg to all other client listenning to the event 'message'
-		client.broadcast.emit('message', msg);
+		this.server.emit('message', msg);
 	}
 }
