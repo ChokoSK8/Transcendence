@@ -25,7 +25,7 @@ function App() {
 		// [setSocket] dependency will make useEffect runs only on the first render and any time dependency value changes
 	useEffect(() => {
 			// passing the chat.gateway.url
-		const newSocket = io('http://localhost:4141');
+		const newSocket = io('http://localhost:4343');
 		setSocket(newSocket);
 	}, [])
 

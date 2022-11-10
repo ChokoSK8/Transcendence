@@ -7,10 +7,11 @@ services:
     image: back-end
     networks:
       - dnet
+    expose:
+      - 3001
+      - 5555
     ports:
-      - "3001:3001"
-      - "5555:5555"
-      - "4343:80"
+      - "4343:4343"
     env_file:
       - .env
     volumes:
@@ -40,8 +41,6 @@ services:
       - dnet
     ports:
       - "3000:3000"
-      - "4000:4000"
-      - "4141:80"
     env_file:
       - .env
     volumes:
